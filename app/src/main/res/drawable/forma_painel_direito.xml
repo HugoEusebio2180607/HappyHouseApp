@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android1="http://schemas.android.com/apk/res/android">
+    <item android1:drawable="@drawable/shadow_panel_direito"/>
+    <item>
+        <shape
+            android:shape="rectangle"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <corners android:topLeftRadius="40dp"  android:bottomLeftRadius="40dp" />
+            <gradient
+                android:angle="225"
+                android:startColor="@color/colorPrimary"
+                android:centerColor="@color/colorPrimaryDark"
+                android:endColor="@color/colorAccent"/>
+        </shape>
+    </item>
+</layer-list>

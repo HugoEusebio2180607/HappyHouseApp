@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.house;
+package amsi.dei.estg.ipleiria.happy_house;
 
 import org.junit.Test;
 

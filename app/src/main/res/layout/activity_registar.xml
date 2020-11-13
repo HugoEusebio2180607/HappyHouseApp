@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,64 +8,151 @@
     android:layout_height="match_parent"
     tools:context=".RegistarActivity">
 
+    <RelativeLayout
+        android:id="@+id/rlCabecalho"
+        android:layout_width="413dp"
+        android:layout_height="113dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-2dp">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="111dp"
+            android:src="@drawable/logohappyhouse" />
 
-    <ImageView
-        android:id="@+id/ImageView"
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/painel_lateral"
+        android:layout_width="165dp"
+        android:layout_height="468dp"
+        android:background="@drawable/forma_painel_direito"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/rlCabecalho"
+        app:layout_constraintTop_toTopOf="@+id/rlCabecalho"
+        app:layout_constraintVertical_bias="0.53"
+        tools:ignore="MissingConstraints">
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvRegistar"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/logohappyhouse" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
-
-    <EditText
-        android:id="@+id/etNome"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/etNome"/>
+        android:text="Registar"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLogin"
+        app:layout_constraintEnd_toEndOf="@+id/rlCabecalho"
+        app:layout_constraintStart_toEndOf="@+id/tvLogin" />
 
-    <EditText
-        android:id="@+id/etTelefone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="phone"
-        android:hint="@string/etTelefone"/>
+    <LinearLayout
+        android:id="@+id/LoginPainel"
+        android:layout_width="273dp"
+        android:layout_height="343dp"
+        android:background="@drawable/forma_login_painel"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingTop="30dp"
+        android:paddingRight="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rlCabecalho"
+        app:layout_constraintVertical_bias="0.465"
+        tools:ignore="MissingConstraints">
 
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="@string/etEmail"/>
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="@string/etPassword"/>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="25dp" />
+        <EditText
+            android:id="@+id/etNome"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableRight="@drawable/ic_pessoa"
+            android:hint="Nome" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableRight="@drawable/ic_email"
+            android:hint="Email" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableRight="@drawable/ic_lock"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/etTelefone"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="phone"
+            android:drawableRight="@drawable/ic_phone"
+           android:hint="Telemovel" />
+
+
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btnRegistar"
-        android:layout_width="100dp"
+        android:id="@+id/button"
+        android:layout_width="124dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:text="@string/btnregistar"
-        android:onClick="onClickRegistar"/>
+        android:background="@drawable/buttonstyle"
+        android:text="Registar"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/rlCabecalho"
+        app:layout_constraintVertical_bias="0.83"
+        tools:ignore="MissingConstraints" />
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ainda nao te registas-te?" />
+
+        <TextView
+            android:id="@+id/tvRegisto"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_marginLeft="15dp"
+            android:text="Registar"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:text="Login"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/LoginPainel"
+        app:layout_constraintEnd_toEndOf="@+id/painel_lateral"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/LoginPainel"
+        app:layout_constraintTop_toTopOf="@+id/painel_lateral"
+        app:layout_constraintVertical_bias="0.94" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
