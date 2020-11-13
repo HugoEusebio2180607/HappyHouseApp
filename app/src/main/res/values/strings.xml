@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Happy-House</string>
+    <string name="email_hint">etEmail</string>
+    <string name="etNome">Nome</string>
+    <string name="etTelefone">Telefone</string>
+    <string name="etEmail">Email</string>
+    <string name="etPassword">Password</string>
+    <string name="btnregistar">Registar</string>
+    <string name="menu_casas">Casas</string>
+    <string name="menu_historico_de_compras">Historico de compras</string>
+    <string name="menu_favoritos">Favoritos</string>
+    <string name="menu_defenicoes">Defeniçoes</string>
+    <string name="menu_logout">Logout</string>
+    <string name="tvregiste_se">Registe-se</string>
+    <string name="email_login"> Email</string>
+    <string name="passsword_login">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="texto_para_registar">Se nao estiver registado :</string>
+    <string name="bem_vindo">Bem Vindo</string>
+</resources>

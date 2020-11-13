@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/WhiteSmoke"
+    tools:context=".LoginActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/rlCabecalho"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logohappyhouse" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/painel_lateral"
+        android:layout_width="205dp"
+        android:layout_height="456dp"
+        android:background="@drawable/painel_lateral_esquerdo"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/LoginPainel"
+        android:layout_width="wrap_content"
+        android:layout_height="230dp"
+        android:background="@drawable/forma_login_painel"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingTop="30dp"
+        android:paddingRight="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/painel_lateral"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/painel_lateral"
+        app:layout_constraintTop_toBottomOf="@+id/rlCabecalho"
+        tools:ignore="MissingConstraints">
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="Email" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ainda nao te registas-te?" />
+
+        <TextView
+            android:id="@+id/tvRegisto"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_marginLeft="15dp"
+            android:text="Registar"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:text="Login"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/LoginPainel"
+        app:layout_constraintEnd_toEndOf="@+id/painel_lateral"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/LoginPainel"
+        app:layout_constraintTop_toTopOf="@+id/painel_lateral"
+        app:layout_constraintVertical_bias="0.94" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="124dp"
+        android:layout_height="50dp"
+        android:background="@drawable/buttonstyle"
+        android:text="Login"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/LoginPainel"
+        app:layout_constraintVertical_bias="0.57"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
