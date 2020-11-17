@@ -38,8 +38,8 @@
 
     <LinearLayout
         android:id="@+id/LoginPainel"
-        android:layout_width="wrap_content"
-        android:layout_height="230dp"
+        android:layout_width="297dp"
+        android:layout_height="369dp"
         android:background="@drawable/forma_login_painel"
         android:orientation="vertical"
         android:paddingLeft="30dp"
@@ -56,6 +56,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="Email" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -114,7 +118,7 @@
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="@+id/LoginPainel"
-        app:layout_constraintVertical_bias="0.57"
+        app:layout_constraintVertical_bias="0.79"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
