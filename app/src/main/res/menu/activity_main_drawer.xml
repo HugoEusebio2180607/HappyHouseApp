@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group  android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_imoveis"
+            android:icon="@drawable/ic_home"
+            android:title="Imóveis" />
+        <item
+            android:id="@+id/nav_historico_compras"
+            android:icon="@drawable/ic_historico_compras"
+            android:title="Histórico de Compra/Aluguer" />
+        <item
+            android:id="@+id/nav_favoritos"
+            android:icon="@drawable/ic_favourite"
+            android:title="Favoritos" />
+        <item
+            android:id="@+id/nav_historico_visitas"
+            android:icon="@drawable/ic_historico_visitas"
+            android:title="Histórico de Visitas" />
+        <item
+            android:id="@+id/nav_definicoes"
+            android:icon="@drawable/ic_settings"
+            android:title="Definições" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout" />
+
+    </group>
+
+</menu>
