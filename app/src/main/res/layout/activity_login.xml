@@ -53,6 +53,7 @@
 
 
         <EditText
+            android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="Email" />
@@ -62,6 +63,7 @@
             android:layout_height="30dp"/>
 
         <EditText
+            android:id="@+id/editTextPW"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="Password"
