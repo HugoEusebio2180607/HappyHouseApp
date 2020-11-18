@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class RegistarActivity extends AppCompatActivity {
 
@@ -20,6 +21,14 @@ public class RegistarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registar);
+        TextView btn=findViewById(R.id.tvtLogin);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegistarActivity.this,LoginActivity.class)
+                );
+            }
+        });
 
         setTitle("Registar");
 

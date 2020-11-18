@@ -14,7 +14,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        TextView btn=findViewById(R.id.tvRegisto);
+        TextView btn=findViewById(R.id.tvtLogin);
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -24,5 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickLogin(View view) {
+        Intent intent = new Intent(this, ListaImoveisFragment.class);
+        startActivity(intent);
+
     }
 }
