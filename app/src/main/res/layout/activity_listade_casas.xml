@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tvcidade"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
@@ -9,10 +10,10 @@
 
 
     <ImageView
-        android:id="@+id/imgCapa"
+        android:id="@+id/imgImovel"
         android:layout_width="108dp"
         android:layout_height="113dp" />
-        //app:srcCompat="" />
+    //app:srcCompat="" />
 
     <Space
         android:layout_width="10dp"
@@ -33,14 +34,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvLocalidade"
                 android:layout_width="24dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Localidade: " />
 
             <TextView
-                android:id="@+id/tvTitulo"
+                android:id="@+id/tvCidade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -61,6 +61,12 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_wcvetor" />
 
+            <TextView
+                android:id="@+id/tvnwc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
 
         </LinearLayout>
 
@@ -74,14 +80,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvtquartos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_quartos" />
 
             <TextView
-                android:id="@+id/tvQuatos"
+                android:id="@+id/tvnquartos"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
@@ -98,14 +103,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvPreço"
                 android:layout_width="22dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Preço: " />
+                android:text="Estado: " />
 
             <TextView
-                android:id="@+id/tvAno"
+                android:id="@+id/tvEstado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
