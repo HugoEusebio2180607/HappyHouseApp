@@ -20,8 +20,8 @@ public class ListaImovelAdaptador extends BaseAdapter {
     private ArrayList<Imovel> imovels;
 
     public  ListaImovelAdaptador(Context context,ArrayList<Imovel> imovels){
-        this.context =context;
-        this.imovels=imovels;
+        this.context = context;
+        this.imovels = imovels;
     }
 
 
@@ -48,6 +48,8 @@ public class ListaImovelAdaptador extends BaseAdapter {
             convertview.setTag(viewHolder);
         }
 
+        viewHolder.update(imovels.get(position));
+
         return convertview;
     }
     private class ViewHolderLista{
@@ -60,6 +62,22 @@ public class ListaImovelAdaptador extends BaseAdapter {
             tvnquartos=view.findViewById(R.id.tvnquartos);
             tvEstado=view.findViewById(R.id.tvEstado);
             imgImovel=view.findViewById(R.id.imgImovel);
+        }
+
+        private void update(Imovel imovel){
+            tvCidade.setText(imovel.getCidade());
+            tvnwc.setText(""+imovel.getNwc());
+            tvnquartos.setText(""+imovel.getNquartos());
+            tvEstado.setText(imovel.getEstado());
+            imgImovel.setImageResource(imovel.getImagem());
+
+            /*Glide.with(context)
+                    .load(imovel.getImagem())
+                    .placeholder(R.drawable.logohappyhouse)
+                    .thumbnail(0f)
+                    .diskCacheStrategy(diskCacheStrategy.All)
+                    .into(imgImovel);*/
+
         }
     }
 }

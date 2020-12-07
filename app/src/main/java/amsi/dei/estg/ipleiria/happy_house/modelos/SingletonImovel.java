@@ -10,6 +10,7 @@ public class SingletonImovel {
 
     private static SingletonImovel instance = null;
     private ArrayList<Imovel> imovels;
+    private ImovelBDHelper imovelsBD;
 
     public static synchronized SingletonImovel getInstance(Context context){
         if (instance == null){
@@ -19,6 +20,9 @@ public class SingletonImovel {
     }
 
     private  SingletonImovel(Context context){
+
+        imovels = new ArrayList<>();
+        imovelsBD = new ImovelBDHelper(context);
         gerarImovel();
     }
 

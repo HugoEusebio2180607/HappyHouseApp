@@ -23,4 +23,5 @@
     <string name="navigation_drawer_close">Fechar</string>
     <string name="msg_valid_email">Introduza um email válido.</string>
     <string name="msg_valid_pw">Password Inválida</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
