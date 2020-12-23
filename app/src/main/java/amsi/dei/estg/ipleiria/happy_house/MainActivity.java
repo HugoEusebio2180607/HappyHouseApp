@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -90,26 +91,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 setTitle(menuItem.getTitle());
                 break;
             case R.id.nav_historico_compras:
-                //fragment = new ;
+                fragment = new HistoricoCompraAluguerFragment();
                 setTitle(menuItem.getTitle());
                 break;
             case R.id.nav_favoritos:
-                //fragment = new ;
+                fragment = new FavoritosFragment();
                 setTitle(menuItem.getTitle());
                 break;
             case R.id.nav_historico_visitas:
-                //fragment = new ;
+                fragment = new HistoricoVisitasFragment();
                 setTitle(menuItem.getTitle());
                 break;
             case R.id.nav_definicoes:
-                //fragment = new ;
+                fragment = new DefinicoesFragment();
                 setTitle(menuItem.getTitle());
                 break;
             case R.id.nav_logout:
-                //fazer logout
+                System.exit(0);
                 break;
         }
 
-        return false;
+        if (fragment != null) {
+            fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
