@@ -70,7 +70,8 @@ public class DetalhesImovelActivity extends AppCompatActivity /*implements OnMap
         tvQuartos.setText(imovel.getNquartos());
         tvGaragem.setText(imovel.getGaragem());
         tvPiso.setText(imovel.getPiso());
-        imgCapa.setImageResource(imovel.getImagem());
+        //imgCapa.setImageResource(imovel.getImagem());
+        imgCapa.setImageResource(R.drawable.casa);
 
     }
 

@@ -3,6 +3,8 @@ package amsi.dei.estg.ipleiria.happy_house;
 import android.content.Intent;
 import android.os.Bundle;
 
+import amsi.dei.estg.ipleiria.happy_house.listeners.ImoveisListener;
+import amsi.dei.estg.ipleiria.happy_house.utils.ImovelJsonParser;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -20,14 +22,11 @@ import amsi.dei.estg.ipleiria.happy_house.modelos.Imovel;
 import amsi.dei.estg.ipleiria.happy_house.modelos.SingletonImovel;
 
 
-public class ListaImoveisFragment extends Fragment {
+public class ListaImoveisFragment extends Fragment implements ImoveisListener {
 
     private ListView lvListaImoveis;
     private ArrayList<Imovel>listaImoveis;
-
-    public ListaImoveisFragment() {
-        // Required empty public constructor
-    }
+    private ListaImovelAdaptador listaImovelAdaptador;
 
 
     @Override
@@ -35,8 +34,8 @@ public class ListaImoveisFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lista_imoveis, container, false);
         lvListaImoveis = view.findViewById(R.id.lvListaImoveis);
-        listaImoveis= SingletonImovel.getInstance(getContext()).getImovels();
-        lvListaImoveis.setAdapter(new ListaImovelAdaptador(getContext(),listaImoveis));
+        //listaImoveis= SingletonImovel.getInstance(getContext()).getImovels();
+        //lvListaImoveis.setAdapter(new ListaImovelAdaptador(getContext(),listaImoveis));
 
         lvListaImoveis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -50,6 +49,25 @@ public class ListaImoveisFragment extends Fragment {
             }
         });
 
+        SingletonImovel.getInstance(getContext()).setImoveisListener(this);
+        SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
+    }
+
+    @Override
+    public void onRefreshListaImoveis(ArrayList<Imovel> listaImoveis) {
+        System.out.println("--> onRefreshListaImoveis: " + listaImoveis);
+        if (!listaImoveis.isEmpty()){
+            listaImovelAdaptador = new ListaImovelAdaptador(getContext(), listaImoveis);
+            lvListaImoveis.setAdapter(new ListaImovelAdaptador(getContext(), listaImoveis));
+            listaImovelAdaptador.refresh(listaImoveis);
+        }
     }
 }

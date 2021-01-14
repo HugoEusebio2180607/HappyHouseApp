@@ -8,6 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.ArrayList;
 
 import amsi.dei.estg.ipleiria.happy_house.R;
@@ -52,6 +55,12 @@ public class ListaImovelAdaptador extends BaseAdapter {
 
         return convertview;
     }
+
+    public void refresh(ArrayList<Imovel> listaImoveis) {
+        this.imovels = listaImoveis;
+        notifyDataSetChanged();
+    }
+
     private class ViewHolderLista{
         private TextView tvCidade, tvnwc, tvnquartos ,tvEstado;
         private ImageView imgImovel;
@@ -69,14 +78,14 @@ public class ListaImovelAdaptador extends BaseAdapter {
             tvnwc.setText(""+imovel.getNwc());
             tvnquartos.setText(""+imovel.getNquartos());
             tvEstado.setText(imovel.getEstado());
-            imgImovel.setImageResource(imovel.getImagem());
+            //imgImovel.setImageResource(imovel.getImagem());
 
-            /*Glide.with(context)
-                    .load(imovel.getImagem())
+            Glide.with(context)
+                    .load(R.drawable.casa)
                     .placeholder(R.drawable.logohappyhouse)
                     .thumbnail(0f)
-                    .diskCacheStrategy(diskCacheStrategy.All)
-                    .into(imgImovel);*/
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imgImovel);
 
         }
     }
