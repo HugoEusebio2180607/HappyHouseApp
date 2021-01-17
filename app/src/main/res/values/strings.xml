@@ -24,4 +24,9 @@
     <string name="msg_valid_email">Introduza um email válido.</string>
     <string name="msg_valid_pw">Password Inválida</string>
     <string name="title_activity_maps">Map</string>
+    <string name="favorito">Favorito</string>
+    <string name="cidade">Cidade</string>
+    <string name="quartos">Quartos</string>
+    <string name="estado">Estado</string>
+    <string name="preco">Preco</string>
 </resources>

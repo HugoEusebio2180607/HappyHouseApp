@@ -2,10 +2,16 @@ package amsi.dei.estg.ipleiria.happy_house;
 
 import amsi.dei.estg.ipleiria.happy_house.modelos.Imovel;
 import amsi.dei.estg.ipleiria.happy_house.modelos.SingletonImovel;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +32,8 @@ public class DetalhesImovelActivity extends AppCompatActivity /*implements OnMap
     private TextView tvEstado, tvArea, tvWCs, tvQuartos, tvGaragem, tvPiso;
     private ImageView imgCapa;
     private Button btnMapa;
+    private MenuItem itemFavorito;
+    private Boolean isFavourite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +48,12 @@ public class DetalhesImovelActivity extends AppCompatActivity /*implements OnMap
         imovel = SingletonImovel.getInstance(getApplicationContext()).getImovel(id);
 
 
-        tvEstado = findViewById(R.id.tvEstado);
-        tvArea = findViewById(R.id.tvArea);
-        tvWCs = findViewById(R.id.tvWC);
-        tvQuartos = findViewById(R.id.tvQuartos);
-        tvGaragem = findViewById(R.id.tvGaragem);
-        tvPiso = findViewById(R.id.tvPiso);
+        tvEstado = findViewById(R.id.tvEstadoInfo);
+        tvArea = findViewById(R.id.tvAreaInfo);
+        tvWCs = findViewById(R.id.tvWcInfo);
+        tvQuartos = findViewById(R.id.tvQuartosInfo);
+        tvGaragem = findViewById(R.id.tvGaragemInfo);
+        tvPiso = findViewById(R.id.tvPisoInfo);
         imgCapa = findViewById(R.id.imageView2);
 
         btnMapa = findViewById(R.id.btnMap);
@@ -59,20 +67,44 @@ public class DetalhesImovelActivity extends AppCompatActivity /*implements OnMap
         });
 
         setTitle("Detalhes: ");
-        //carregarDetalhesCasa();
-    }
-
-    private void carregarDetalhesCasa() {
 
         tvEstado.setText(imovel.getEstado());
-        tvArea.setText(imovel.getArea());
-        tvWCs.setText(imovel.getNwc());
-        tvQuartos.setText(imovel.getNquartos());
-        tvGaragem.setText(imovel.getGaragem());
-        tvPiso.setText(imovel.getPiso());
+        tvArea.setText(imovel.getArea()+"");
+        tvWCs.setText(imovel.getNwc()+"");
+        tvQuartos.setText(imovel.getNquartos()+"");
+        tvGaragem.setText(imovel.getGaragem()+"");
+        tvPiso.setText(imovel.getPiso()+"");
         //imgCapa.setImageResource(imovel.getImagem());
         imgCapa.setImageResource(R.drawable.casa);
+    }
 
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_favorito, menu);
+
+        itemFavorito = menu.findItem(R.id.itemFavorito);
+
+        return(super.onCreateOptionsMenu(menu));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itemFavorito:
+                if (!isFavourite){
+                    item.setIcon(R.drawable.ic_star);
+                    isFavourite = true;
+                }  else {
+                    item.setIcon(R.drawable.ic_star_border);
+                    isFavourite = false;
+                }
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 //    @Override

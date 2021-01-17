@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/itemCidadeFiltro"
+        android:title="@string/cidade"
+        android:icon="@drawable/ic_location_city"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/itemQuartosFiltro"
+        android:title="@string/quartos"
+        android:icon="@drawable/ic_quartos"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/itemEstadoFiltro"
+        android:title="@string/estado"
+        android:icon="@drawable/ic_historico_compras"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/itemPrecoFiltro"
+        android:title="@string/preco"
+        android:icon="@drawable/ic_euro"
+        app:showAsAction="always"/>
+
+</menu>

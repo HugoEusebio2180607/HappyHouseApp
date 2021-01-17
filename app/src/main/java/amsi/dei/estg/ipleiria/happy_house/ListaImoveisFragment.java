@@ -5,9 +5,13 @@ import android.os.Bundle;
 
 import amsi.dei.estg.ipleiria.happy_house.listeners.ImoveisListener;
 import amsi.dei.estg.ipleiria.happy_house.utils.ImovelJsonParser;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,11 +31,13 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
     private ListView lvListaImoveis;
     private ArrayList<Imovel>listaImoveis;
     private ListaImovelAdaptador listaImovelAdaptador;
+    private MenuItem menuCidadeFiltro, menuQuartosFiltro, menuEstadoFiltro, menuPrecoFiltro;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_lista_imoveis, container, false);
         lvListaImoveis = view.findViewById(R.id.lvListaImoveis);
         //listaImoveis= SingletonImovel.getInstance(getContext()).getImovels();
@@ -59,6 +65,35 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
     public void onResume() {
         super.onResume();
         SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_imovel, menu);
+
+        menuCidadeFiltro = menu.findItem(R.id.itemCidadeFiltro);
+        menuQuartosFiltro = menu.findItem(R.id.itemQuartosFiltro);
+        menuEstadoFiltro = menu.findItem(R.id.itemEstadoFiltro);
+        menuPrecoFiltro = menu.findItem(R.id.itemPrecoFiltro);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.itemCidadeFiltro:
+                break;
+            case R.id.itemQuartosFiltro:
+                break;
+            case R.id.itemEstadoFiltro:
+                break;
+            case R.id.itemPrecoFiltro:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
