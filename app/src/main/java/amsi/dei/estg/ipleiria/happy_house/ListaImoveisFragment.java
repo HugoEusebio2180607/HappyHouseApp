@@ -1,5 +1,7 @@
 package amsi.dei.estg.ipleiria.happy_house;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -19,6 +21,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import amsi.dei.estg.ipleiria.happy_house.R;
 import amsi.dei.estg.ipleiria.happy_house.adaptadores.ListaImovelAdaptador;
@@ -32,6 +35,9 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
     private ArrayList<Imovel>listaImoveis;
     private ListaImovelAdaptador listaImovelAdaptador;
     private MenuItem menuCidadeFiltro, menuQuartosFiltro, menuEstadoFiltro, menuPrecoFiltro;
+    private String[] listaCidades;
+    private boolean[] checkedCidades;
+    private ArrayList<Integer> userCidades = new ArrayList<>();
 
 
     @Override
@@ -42,6 +48,11 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
         lvListaImoveis = view.findViewById(R.id.lvListaImoveis);
         //listaImoveis= SingletonImovel.getInstance(getContext()).getImovels();
         //lvListaImoveis.setAdapter(new ListaImovelAdaptador(getContext(),listaImoveis));
+
+
+        listaCidades = getResources().getStringArray(R.array.cidades);
+        checkedCidades = new boolean[listaCidades.length];
+
 
         lvListaImoveis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -80,17 +91,89 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
+        //int id = item.getItemId();
 
-        switch (id) {
+
+        switch (item.getItemId()) {
             case R.id.itemCidadeFiltro:
+                 new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.cidade)
+                        .setMultiChoiceItems(listaCidades, checkedCidades, new DialogInterface.OnMultiChoiceClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
+                                if (isChecked){
+                                    if (!userCidades.contains(position)) {
+                                        userCidades.add(position);
+                                    } else {
+                                        userCidades.remove(position);
+                                    }
+                                }
+                            }
+                        })
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.confirmar, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+
+                                ArrayList<Imovel> tempLista = new ArrayList<>();
+                                ArrayList<String> auxLista = new ArrayList<>();
+
+                                if (userCidades == null){
+                                    dialogInterface.dismiss();
+                                } else {
+
+                                    ArrayList<String> list = new ArrayList<>(Arrays.asList("Aveiro", "Beja", "Braga", "Bragança", "Castelo Branco", "Coimbra", "Évora", "Faro", "Guarda", "Leiria", "Lisboa", "Portalegre", "Porto", "Santarém", "Setúbal", "Viana Do Castelo", "Vila Real", "Viseu"));
+
+                                    for (int i=0; i<userCidades.size(); i++){
+                                            String aux = list.get(userCidades.get(i));
+                                            auxLista.add(aux);
+
+                                    }
+                                    System.out.println("--->"+ auxLista);
+
+                                    for (Imovel tempImovel : SingletonImovel.getInstance(getContext()).getImoveisBD()){
+                                        if (tempImovel.getCidade().toLowerCase().contentEquals(auxLista.toString().toLowerCase())){
+                                            tempLista.add(tempImovel);
+                                        }
+                                    }
+
+                                }
+                                if (auxLista.isEmpty()){
+                                    SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
+                                } else {
+                                    lvListaImoveis.setAdapter(new ListaImovelAdaptador(getContext(), tempLista));
+                                }
+
+
+                            }
+                        })
+                        .setNeutralButton(R.string.limpar, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                                if (userCidades == null){
+                                    dialogInterface.dismiss();
+                                } else {
+                                    for (int i = 0; i < checkedCidades.length; i++) {
+                                        checkedCidades[i] = false;
+                                        userCidades.clear();
+                                    }
+                                }
+                                SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
+                            }
+                        })
+                         .show();
+
+
                 break;
             case R.id.itemQuartosFiltro:
+                Toast.makeText(getContext(), "Quartos", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.itemEstadoFiltro:
+                Toast.makeText(getContext(), "Estado", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.itemPrecoFiltro:
+                Toast.makeText(getContext(), "Preco", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);

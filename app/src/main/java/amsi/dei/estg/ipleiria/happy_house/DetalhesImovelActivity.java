@@ -29,7 +29,7 @@ public class DetalhesImovelActivity extends AppCompatActivity /*implements OnMap
 
     public static final String ID = "ID";
     private Imovel imovel;
-    private TextView tvEstado, tvArea, tvWCs, tvQuartos, tvGaragem, tvPiso;
+    private TextView tvEstado, tvArea, tvWCs, tvQuartos, tvGaragem, tvPiso, tvDescricao, tvCidade, tvMorada, tvCodigoPostal, tvPreco;
     private ImageView imgCapa;
     private Button btnMapa;
     private MenuItem itemFavorito;
@@ -48,12 +48,17 @@ public class DetalhesImovelActivity extends AppCompatActivity /*implements OnMap
         imovel = SingletonImovel.getInstance(getApplicationContext()).getImovel(id);
 
 
+        tvDescricao = findViewById(R.id.tvDescricao);
         tvEstado = findViewById(R.id.tvEstadoInfo);
         tvArea = findViewById(R.id.tvAreaInfo);
         tvWCs = findViewById(R.id.tvWcInfo);
         tvQuartos = findViewById(R.id.tvQuartosInfo);
         tvGaragem = findViewById(R.id.tvGaragemInfo);
         tvPiso = findViewById(R.id.tvPisoInfo);
+        tvCidade = findViewById(R.id.tvCidadeInfo);
+        tvMorada = findViewById(R.id.tvMoradaInfo);
+        tvCodigoPostal = findViewById(R.id.tvCodigoPostalInfo);
+        tvPreco = findViewById(R.id.tvPrecoInfo);
         imgCapa = findViewById(R.id.imageView2);
 
         btnMapa = findViewById(R.id.btnMap);
@@ -68,12 +73,17 @@ public class DetalhesImovelActivity extends AppCompatActivity /*implements OnMap
 
         setTitle("Detalhes: ");
 
+        tvDescricao.setText(imovel.getDescricao());
         tvEstado.setText(imovel.getEstado());
         tvArea.setText(imovel.getArea()+"");
         tvWCs.setText(imovel.getNwc()+"");
         tvQuartos.setText(imovel.getNquartos()+"");
         tvGaragem.setText(imovel.getGaragem()+"");
         tvPiso.setText(imovel.getPiso()+"");
+        tvCidade.setText(imovel.getCidade());
+        tvMorada.setText(imovel.getMorada());
+        tvCodigoPostal.setText(imovel.getCodigo_postal());
+        tvPreco.setText(imovel.getPreco()+"");
         //imgCapa.setImageResource(imovel.getImagem());
         imgCapa.setImageResource(R.drawable.casa);
     }

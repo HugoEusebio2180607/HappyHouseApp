@@ -62,22 +62,22 @@ public class ListaImovelAdaptador extends BaseAdapter {
     }
 
     private class ViewHolderLista{
-        private TextView tvCidade, tvnwc, tvnquartos ,tvEstado;
+        private TextView tvCidade, tvnquartos ,tvEstado, tvPreco;
         private ImageView imgImovel;
 
         public ViewHolderLista(View view){
             tvCidade=view.findViewById(R.id.tvCidade);
-            tvnwc=view.findViewById(R.id.tvnwc);
             tvnquartos=view.findViewById(R.id.tvnquartos);
             tvEstado=view.findViewById(R.id.tvEstado);
+            tvPreco=view.findViewById(R.id.tvPreco);
             imgImovel=view.findViewById(R.id.imgImovel);
         }
 
         private void update(Imovel imovel){
             tvCidade.setText(imovel.getCidade());
-            tvnwc.setText(""+imovel.getNwc());
             tvnquartos.setText(""+imovel.getNquartos());
             tvEstado.setText(imovel.getEstado());
+            tvPreco.setText(""+imovel.getPreco());
             //imgImovel.setImageResource(imovel.getImagem());
 
             Glide.with(context)

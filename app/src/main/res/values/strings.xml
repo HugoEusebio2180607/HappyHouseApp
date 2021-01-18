@@ -29,4 +29,27 @@
     <string name="quartos">Quartos</string>
     <string name="estado">Estado</string>
     <string name="preco">Preco</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="limpar">Limpar</string>
+
+    <string-array name="cidades">
+        <item>Aveiro</item>
+        <item>Beja</item>
+        <item>Braga</item>
+        <item>Bragança</item>
+        <item>Castelo Branco</item>
+        <item>Coimbra</item>
+        <item>Évora</item>
+        <item>Faro</item>
+        <item>Guarda</item>
+        <item>Leiria</item>
+        <item>Lisboa</item>
+        <item>Portalegre</item>
+        <item>Porto</item>
+        <item>Santarém</item>
+        <item>Setúbal</item>
+        <item>Viana Do Castelo</item>
+        <item>Vila Real</item>
+        <item>Viseu</item>
+    </string-array>
 </resources>
