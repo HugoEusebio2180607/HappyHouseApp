@@ -18,18 +18,22 @@ import java.util.ArrayList;
 import amsi.dei.estg.ipleiria.happy_house.R;
 import amsi.dei.estg.ipleiria.happy_house.listeners.ImoveisListener;
 import amsi.dei.estg.ipleiria.happy_house.utils.ImovelJsonParser;
+import amsi.dei.estg.ipleiria.happy_house.utils.UserJsonParser;
 
 public class SingletonImovel extends Application implements ImoveisListener {
 
     private static SingletonImovel instance = null;
     private ArrayList<Imovel> imovels;
+    private ArrayList<User> users;
     private ImovelBDHelper imovelsBD;
+    private UserBDHelper usersBD;
 
     private ImoveisListener imoveisListener;
 
     private static RequestQueue volleyQueue = null;
     //private String tokenAPI = "TOKEN";
     private String mUrlApiImoveis = "http://10.0.2.2:8888/imovel/";
+    private  String mUrlApiUsers ="http://10.0.2.2:8888/user/";
 
     public static synchronized SingletonImovel getInstance(Context context){
         if (instance == null){
@@ -43,11 +47,16 @@ public class SingletonImovel extends Application implements ImoveisListener {
 
         imovels = new ArrayList<>();
         imovelsBD = new ImovelBDHelper(context);
+        users = new ArrayList<>();
+        usersBD = new UserBDHelper(context);
         //gerarImovel();
     }
 
     public ArrayList<Imovel> getImoveisBD(){
         return imovels = imovelsBD.getAllImoveisBD();
+    }
+    public ArrayList<User> getUsersBD(){
+        return users= usersBD.getAllUserBD();
     }
 
     /*private void gerarImovel() {
@@ -78,6 +87,16 @@ public class SingletonImovel extends Application implements ImoveisListener {
             adicionarImovelBD(imovel);
         }
     }
+    public void adicionarUserBD(User user){
+        usersBD.adicionarUserBD(user);
+    }
+
+    public void adicionarUsersBD(ArrayList<User> listausers){
+        usersBD.removerAllUsersBD();
+        for (User user : listausers){
+            adicionarUserBD(user);
+        }
+    }
 
     public void getAllImoveisAPI(final Context context, boolean isConnected){
         Toast.makeText(context, "ISCONNECTED : " + isConnected, Toast.LENGTH_SHORT).show();
@@ -103,6 +122,32 @@ public class SingletonImovel extends Application implements ImoveisListener {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     System.out.println("--> Erro: getAllImoveisAPI");
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+    public void getAllUsersAPI(final Context context, boolean isConnected){
+        Toast.makeText(context, "ISCONNECTED : " + isConnected, Toast.LENGTH_SHORT).show();
+
+        if (!isConnected){
+            users = usersBD.getAllUserBD();
+
+        } else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlApiUsers, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    System.out.println(response);
+                    users= UserJsonParser.parserJsonUsers(response, context);
+                    adicionarUsersBD(users);
+
+                }
+            }, new Response.ErrorListener(){
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("--> Erro: getAllUsersAPI");
                 }
             });
             volleyQueue.add(req);

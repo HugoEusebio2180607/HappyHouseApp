@@ -8,4 +8,5 @@ public interface ImoveisListener {
 
     void onRefreshListaImoveis(ArrayList<Imovel> listaImoveis);
 
+
 }

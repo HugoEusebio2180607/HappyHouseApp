@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private FragmentManager fragmentManager;
 
-    public static final String CHAVE_EMAIL = "EMAIL";
+    public static final String CHAVE_USERNAME = "USERNAME";
     public static final String SECCAO_INFO_USER = "SECCAO_INFO_USER";
-    private String email = "";
+    private String username = "";
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -59,18 +59,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sharedPreferences = getSharedPreferences(SECCAO_INFO_USER, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        email = getIntent().getStringExtra(CHAVE_EMAIL).toString();
+        username = getIntent().getStringExtra(CHAVE_USERNAME).toString();
 
-        if (email == null) {
-            email = sharedPreferences.getString(SECCAO_INFO_USER, "Não Existe");
+        if (username == null) {
+            username = sharedPreferences.getString(SECCAO_INFO_USER, "Não Existe");
         } else {
-            editor.putString(SECCAO_INFO_USER, email);
+            editor.putString(SECCAO_INFO_USER, username);
             editor.apply();
         }
 
         View view = navigationView.getHeaderView(0);
         TextView textView_user = view.findViewById(R.id.tvEmail);
-        textView_user.setText(email);
+        textView_user.setText(username);
     }
 
     private void carregamentoFragmentoInicial() {

@@ -53,10 +53,10 @@
 
 
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:hint="Email" />
+            android:hint="Username" />
 
         <Space
             android:layout_width="match_parent"
@@ -67,7 +67,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+           />
 
     </LinearLayout>
 
@@ -86,13 +87,14 @@
             android:text="Ainda nao te registas-te?" />
 
         <TextView
-            android:id="@+id/tvtLogin"
+            android:id="@+id/tvLogin"
             android:layout_width="wrap_content"
             android:layout_height="37dp"
             android:layout_marginLeft="15dp"
             android:text="Registar"
             android:textColor="@color/colorAccent"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+           />
 
     </LinearLayout>
 
@@ -111,7 +113,7 @@
         app:layout_constraintVertical_bias="0.94" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_registar"
         android:layout_width="124dp"
         android:layout_height="50dp"
         android:background="@drawable/buttonstyle"
