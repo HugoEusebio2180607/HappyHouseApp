@@ -37,10 +37,10 @@ public class UserBDHelper extends SQLiteOpenHelper {
                 "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 USERNAME + " TEXT NOT NULL, " +
                 NIF + " INTEGER NOT NULL, " +
-                EMAIL + " STRING NOT NULL, " +
-                PASSWORD_HASH + " STRING NOT NULL, " +
-                TELEMOVEL + " INTEGER NOT NULL, " +
-                FAVORITOS + "TEXT  NOT NULL" +
+                EMAIL + " TEXT NOT NULL, " +
+                PASSWORD_HASH + " TEXT NOT NULL, " +
+                TELEMOVEL + " INTEGER  NOT NULL, " +
+                FAVORITOS + " TEXT " +
                 ");";
         sqLiteDatabase.execSQL(createUserTable);
     }
@@ -54,12 +54,12 @@ public class UserBDHelper extends SQLiteOpenHelper {
     public ArrayList<User> getAllUserBD(){
 
         ArrayList<User> users = new ArrayList<>();
-        Cursor cursor = this.db.query(TABLE_NAME, new String[]{ID, USERNAME,NIF,EMAIL,PASSWORD_HASH,TELEMOVEL},
+        Cursor cursor = this.db.query(TABLE_NAME, new String[]{ID, USERNAME, NIF, EMAIL, PASSWORD_HASH, TELEMOVEL, FAVORITOS},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()){
             do{
-                User auxUser = new User(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getString(5));
+                User auxUser = new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5), cursor.getString(6));
                 users.add(auxUser);
             }while (cursor.moveToNext());
         }
@@ -70,7 +70,10 @@ public class UserBDHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(USERNAME,user.getUsername());
         values.put(PASSWORD_HASH,user.getPassword_hash());
+        values.put(NIF,user.getNif());
+        values.put(EMAIL,user.getEmail());
         values.put(TELEMOVEL,user.getTelemovel());
+        values.putNull(FAVORITOS);
 
         this.db.insert(TABLE_NAME, null, values);
     }

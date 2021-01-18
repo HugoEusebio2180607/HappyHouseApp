@@ -5,9 +5,6 @@ public class User {
     private int id,telemovel,nif;
     private String username,email,password_hash,favoritos;
 
-    public User(int id, String username, String password_hash, int telemovel, int nif, String email) {
-    }
-
     public int getId() {return id; }
 
     public void setId(int id) { this.id = id; }
@@ -36,7 +33,7 @@ public class User {
 
     public void setFavoritos(String favoritos) { this.favoritos = favoritos; }
 
-    public User(int i, String s, String string, int cursorInt) {
+    public User(int id, String username, int nif, String email, String password_hash, int telemovel, String favoritos) {
         this.id = id;
         this.username = username;
         this.nif = nif;

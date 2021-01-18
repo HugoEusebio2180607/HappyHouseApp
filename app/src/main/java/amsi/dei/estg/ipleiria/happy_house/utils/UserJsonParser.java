@@ -15,21 +15,22 @@ import amsi.dei.estg.ipleiria.happy_house.modelos.User;
 
 public class UserJsonParser {
     public static ArrayList<User> parserJsonUsers(JSONArray response, Context context){
-        System.out.println("--> PARSER LISTA LIVROS: " + response);
+        System.out.println("--> PARSER LISTA USERS: " + response);
         ArrayList<User> tempUsers = new ArrayList<>();
 
         try{
             for(int i = 0; i < response.length(); i++) {
 
                 JSONObject user = (JSONObject) response.get(i);
-                int id = user.getInt("idUser");
+                int id = user.getInt("id");
                 String username = user.getString("username");
                 String password_hash = user.getString("password_hash");
                 int telemovel = user.getInt("telemovel");
                 String email = user.getString("email");
                 int nif= user.getInt("nif");
+                String favoritos = user.getString("favoritos");
 
-                User auxUsers = new User(id, username, password_hash,telemovel,nif,email);
+                User auxUsers = new User(id, username, nif,email, password_hash,telemovel, favoritos);
                 tempUsers.add(auxUsers);
             }
 
@@ -53,10 +54,10 @@ public class UserJsonParser {
             int telemovel = user.getInt("telemovel");
             int nif= user.getInt("nif");
             String email = user.getString("email");
+            String favoritos = user.getString("favoritos");
 
 
-
-            auxUser = new User( id, username,password_hash, telemovel,nif,email);
+            auxUser = new User(id, username, nif,email, password_hash,telemovel, favoritos);
 
         }catch (JSONException e){
             e.printStackTrace();

@@ -35,9 +35,10 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
     private ArrayList<Imovel>listaImoveis;
     private ListaImovelAdaptador listaImovelAdaptador;
     private MenuItem menuCidadeFiltro, menuQuartosFiltro, menuEstadoFiltro, menuPrecoFiltro;
-    private String[] listaCidades;
-    private boolean[] checkedCidades;
+    private String[] listaCidades, nQuartos;
+    private boolean[] checkedCidades, checkedQuartos;
     private ArrayList<Integer> userCidades = new ArrayList<>();
+    private ArrayList<Integer> userQuartos = new ArrayList<>();
 
 
     @Override
@@ -52,6 +53,8 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
 
         listaCidades = getResources().getStringArray(R.array.cidades);
         checkedCidades = new boolean[listaCidades.length];
+        nQuartos = getResources().getStringArray(R.array.quartos);
+        checkedQuartos = new boolean[nQuartos.length];
 
 
         lvListaImoveis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -168,6 +171,74 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                 break;
             case R.id.itemQuartosFiltro:
                 Toast.makeText(getContext(), "Quartos", Toast.LENGTH_SHORT).show();
+
+                /*new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.quartos)
+                        .setMultiChoiceItems(nQuartos, checkedQuartos, new DialogInterface.OnMultiChoiceClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
+                                if (isChecked){
+                                    if (!userQuartos.contains(position)) {
+                                        userQuartos.add(position);
+                                    } else {
+                                        userQuartos.remove(position);
+                                    }
+                                }
+                            }
+                        })
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.confirmar, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+
+                                ArrayList<Imovel> tempLista = new ArrayList<>();
+                                ArrayList<Integer> auxLista = new ArrayList<>();
+
+                                if (userQuartos == null){
+                                    dialogInterface.dismiss();
+                                } else {
+
+                                    ArrayList<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4,5));
+
+                                    for (int i=0; i<userQuartos.size(); i++){
+                                        int aux = list.get(userQuartos.get(i));
+                                        auxLista.add(aux);
+
+                                    }
+                                    System.out.println("--->"+ auxLista);
+
+                                    for (Imovel tempImovel : SingletonImovel.getInstance(getContext()).getImoveisBD()){
+                                        if (tempImovel.getNquartos() == Integer.parseInt(String.valueOf(auxLista))){
+                                            tempLista.add(tempImovel);
+                                        }
+                                    }
+
+                                }
+                                if (auxLista.isEmpty()){
+                                    SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
+                                } else {
+                                    lvListaImoveis.setAdapter(new ListaImovelAdaptador(getContext(), tempLista));
+                                }
+
+
+                            }
+                        })
+                        .setNeutralButton(R.string.limpar, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                                if (userQuartos == null){
+                                    dialogInterface.dismiss();
+                                } else {
+                                    for (int i = 0; i < checkedQuartos.length; i++) {
+                                        checkedQuartos[i] = false;
+                                        userQuartos.clear();
+                                    }
+                                }
+                                SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
+                            }
+                        })
+                        .show();*/
+
                 break;
             case R.id.itemEstadoFiltro:
                 Toast.makeText(getContext(), "Estado", Toast.LENGTH_SHORT).show();

@@ -56,7 +56,7 @@ public class SingletonImovel extends Application implements ImoveisListener {
         return imovels = imovelsBD.getAllImoveisBD();
     }
     public ArrayList<User> getUsersBD(){
-        return users= usersBD.getAllUserBD();
+        return users = usersBD.getAllUserBD();
     }
 
     /*private void gerarImovel() {
@@ -91,9 +91,9 @@ public class SingletonImovel extends Application implements ImoveisListener {
         usersBD.adicionarUserBD(user);
     }
 
-    public void adicionarUsersBD(ArrayList<User> listausers){
+    public void adicionarUsersBD(ArrayList<User> listaUsers){
         usersBD.removerAllUsersBD();
-        for (User user : listausers){
+        for (User user : listaUsers){
             adicionarUserBD(user);
         }
     }

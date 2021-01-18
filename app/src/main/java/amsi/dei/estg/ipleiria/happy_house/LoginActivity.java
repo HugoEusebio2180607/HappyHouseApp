@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -57,15 +56,20 @@ public class LoginActivity extends AppCompatActivity {
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPW);
         btn_login=findViewById(R.id.btn_registar);
+
         SingletonImovel.getInstance(this).getAllUsersAPI(this, UserJsonParser.isConnectionInternet(this));
-        for(User tempUser: SingletonImovel.getInstance(getApplicationContext()).getUsersBD()){
-            auxUser.add(tempUser);
-        }
-        btn_login.setOnClickListener(new View.OnClickListener() {
+
+
+
+        /*btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String mUsername = editTextUsername.getText().toString().trim();
                 String mPass = editTextPassword.getText().toString().trim();
+
+                for(User tempUser: SingletonImovel.getInstance(getApplicationContext()).getUsersBD()){
+                    auxUser.add(tempUser);
+                }
 
                 if (!mUsername.isEmpty() || !mPass.isEmpty()){
                    // Login(mUsername,mPass);
@@ -95,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
 
-        });
+        });*/
     }
 
     private void Login(final String username, final String password){
@@ -146,29 +150,54 @@ public class LoginActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-/*
+
     public void onClickLogin(View view) {
 
-        String email = editTextUsername.getText().toString();
-        String password = editTextPassword.getText().toString();
+        String mUsername = editTextUsername.getText().toString().trim();
+        String mPass = editTextPassword.getText().toString().trim();
 
-        if (!isEmailValido(email)){
-            editTextUsername.setError(getString(R.string.msg_valid_email));
-            return;
+        for(User tempUser: SingletonImovel.getInstance(getApplicationContext()).getUsersBD()){
+            auxUser.add(tempUser);
         }
 
-        if (!isPasswordValida(password)) {
-            editTextPassword.setError(getString(R.string.msg_valid_pw));
-            return;
+        if (!mUsername.isEmpty() || !mPass.isEmpty()){
+            // Login(mUsername,mPass);
+            for(User checkUser: SingletonImovel.getInstance(getApplicationContext()).getUsersBD()){
+                if (checkUser.getUsername().toLowerCase().contentEquals(mUsername.toLowerCase())){
+                    int position = -1;
+                    position=auxUser.indexOf(mUsername);
+                    Toast.makeText(LoginActivity.this, "username", Toast.LENGTH_SHORT).show();
+                    if (checkUser.getPassword_hash().toLowerCase().contentEquals(mPass.toLowerCase())){
+                        int positionpass = -1;
+                        positionpass=auxUser.indexOf(mPass);
+                        int mTelemovel = checkUser.getTelemovel();
+                        Toast.makeText(LoginActivity.this, "password", Toast.LENGTH_SHORT).show();
+                        if (position==positionpass){
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            intent.putExtra(MainActivity.CHAVE_USERNAME, mUsername);
+                            intent.putExtra(MainActivity.CHAVE_PASSWORD, mPass);
+                            intent.putExtra(MainActivity.CHAVE_TELEMOVEL, mTelemovel);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+
+                }
+            }
+        }else {
+            editTextUsername.setError("erro");
+            editTextPassword.setError("erro");
         }
 
-        Intent intent = new Intent(this, MainActivity.class);
+
+
+        /*Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(MainActivity.CHAVE_EMAIL, email);
         startActivity(intent);
-        finish();
+        finish();*/
 
     }
-
+/*
     public boolean isEmailValido(String email){
         if (email == null) {
             return false;
