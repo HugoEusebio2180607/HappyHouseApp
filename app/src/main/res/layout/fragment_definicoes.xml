@@ -28,17 +28,17 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/tvPassword"
+            android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password: " />
+            android:text="Username:" />
 
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="241dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="text" />
 
         <Space
             android:layout_width="20dp"
@@ -56,14 +56,14 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/tvNewPassword"
+            android:id="@+id/tvPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Password: " />
+            android:text="Password: " />
 
         <EditText
-            android:id="@+id/etNewPassword"
-            android:layout_width="wrap_content"
+            android:id="@+id/etPassword"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword" />

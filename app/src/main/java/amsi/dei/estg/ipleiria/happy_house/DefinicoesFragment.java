@@ -12,8 +12,8 @@ import android.widget.EditText;
 
 public class DefinicoesFragment extends Fragment {
 
+    private EditText editTextUsername;
     private EditText editTextPassword;
-    private EditText editTextNewPassword;
     private EditText editTextTelemovel;
     private Button btnGuardar;
 
@@ -27,8 +27,8 @@ public class DefinicoesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_definicoes, container, false);
 
-        editTextPassword = view.findViewById(R.id.etNewPassword);
-        editTextNewPassword = view.findViewById(R.id.etPassword);
+        editTextUsername = view.findViewById(R.id.etPassword);
+        editTextPassword = view.findViewById(R.id.etPassword);
         editTextTelemovel = view.findViewById(R.id.ettelemovel);
         btnGuardar = view.findViewById(R.id.btnGuardar);
 
@@ -41,4 +41,6 @@ public class DefinicoesFragment extends Fragment {
 
         return view;
     }
+
+
 }
