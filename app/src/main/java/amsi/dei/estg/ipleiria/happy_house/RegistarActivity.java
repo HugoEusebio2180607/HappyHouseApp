@@ -1,5 +1,8 @@
 package amsi.dei.estg.ipleiria.happy_house;
 
+import amsi.dei.estg.ipleiria.happy_house.modelos.SingletonImovel;
+import amsi.dei.estg.ipleiria.happy_house.modelos.User;
+import amsi.dei.estg.ipleiria.happy_house.utils.UserJsonParser;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,12 +19,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,9 +37,11 @@ public class RegistarActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etTelefone;
     private EditText etPassword;
+    private EditText etNif;
     private String email;
+    private Date currentTime = Calendar.getInstance().getTime();
 
-    private static String URL_REGISTER ="http://10.0.2.2:8888/user/";
+    private static String URL_REGISTER = "http://10.0.2.2:8888/user/";
 
     private Button btn_registar;
 
@@ -43,11 +51,12 @@ public class RegistarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registar);
 
 
-        etEmail=findViewById(R.id.etEmail);
-        etPassword=findViewById(R.id.etPassword);
-        etTelefone=findViewById(R.id.etTelefone);
-        etNome=findViewById(R.id.etNome);
-        btn_registar=findViewById(R.id.btn_registar);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        etTelefone = findViewById(R.id.etTelefone);
+        etNome = findViewById(R.id.etNome);
+        etNif = findViewById(R.id.etNif);
+        btn_registar = findViewById(R.id.btn_registar);
 
 
         btn_registar.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +70,7 @@ public class RegistarActivity extends AppCompatActivity {
     }
 
 
-    private void Registar(){
+    private void Registar() {
 
 
         final String nome = this.etNome.getText().toString().trim();
@@ -69,36 +78,40 @@ public class RegistarActivity extends AppCompatActivity {
         final String password = this.etPassword.getText().toString().trim();
         final String telemovel = this.etTelefone.getText().toString().trim();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+        SingletonImovel.getInstance(getApplicationContext()).adicionarUserAPI(criarUser(), getApplicationContext());
+        finish();
 
-                        Toast.makeText(RegistarActivity.this,response,Toast.LENGTH_SHORT).show();
-
-                        }
-                    },
-                    new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegistarActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
-                    }
-                })
-
-        {
+        /*StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER, new Response.Listener<String>() {
             @Override
-            protected Map<String, String> getParams(){
-                Map<String,String> params = new HashMap<>();
-                params.put("nome",nome);
-                params.put("email",email);
-                params.put("password",password);
-                params.put("telemovel",telemovel);
+            public void onResponse(String response) {
+                System.out.println("--> RESPOSTA ADD REGISTO " + response);
+                //Toast.makeText(RegistarActivity.this, response, Toast.LENGTH_SHORT).show();
+                if(!nome.isEmpty() && !email.isEmpty() && !password.isEmpty() && !telemovel.isEmpty()){
+                    UserJsonParser.parserJsonUsers(response, getApplicationContext());
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(RegistarActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                System.out.println("--> ERRO: REGISTAR " + error.getMessage());
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("nome", nome);
+                params.put("email", email);
+                params.put("password", password);
+                params.put("telemovel", telemovel);
                 return params;
             }
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        requestQueue.add(stringRequest);*/
     }
 
     /*public void onClickRegistar(View view) {
@@ -143,7 +156,10 @@ public class RegistarActivity extends AppCompatActivity {
     }
 */
 
-
-
+    private User criarUser(){
+        User auxUser = new User(0, etNome.getText().toString(), Integer.parseInt(etNif.getText().toString()), etEmail.getText().toString(), etPassword.getText().toString(), Integer.parseInt(etTelefone.getText().toString()), null, "j356B8Zd273YagfFewbwXtoivYxIAhQ6", String.valueOf(currentTime), String.valueOf(currentTime));
+        return auxUser;
+    }
 
 }
+

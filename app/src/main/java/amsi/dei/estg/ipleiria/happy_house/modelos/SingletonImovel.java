@@ -1,6 +1,7 @@
 package amsi.dei.estg.ipleiria.happy_house.modelos;
 
 import android.app.Application;
+import android.content.ContentValues;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -9,11 +10,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import amsi.dei.estg.ipleiria.happy_house.R;
 import amsi.dei.estg.ipleiria.happy_house.listeners.ImoveisListener;
@@ -152,6 +156,33 @@ public class SingletonImovel extends Application implements ImoveisListener {
             });
             volleyQueue.add(req);
         }
+    }
+
+    public void adicionarUserAPI(final User user, final Context context){
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlApiUsers, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println("--> RESPOSTA ADD POST " + response);
+                UserJsonParser.parserJsonUsers(response, context);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("--> ERRO: adicionarUserAPI " + error.getMessage());
+            }
+        })
+        {
+            protected Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("username", user.getUsername());
+                params.put("email", user.getEmail());
+                params.put("password", user.getPassword_hash());
+                params.put("telemovel", user.getTelemovel()+"");
+
+                return  params;
+            }
+        };
+        volleyQueue.add(req);
     }
 
     public void setImoveisListener(ImoveisListener imoveisListener){

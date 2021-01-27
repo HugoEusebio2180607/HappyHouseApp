@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class UserBDHelper extends SQLiteOpenHelper {
 
@@ -59,7 +62,7 @@ public class UserBDHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()){
             do{
-                User auxUser = new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5), cursor.getString(6));
+                User auxUser = new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9));
                 users.add(auxUser);
             }while (cursor.moveToNext());
         }

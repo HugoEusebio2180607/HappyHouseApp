@@ -1,5 +1,6 @@
 package amsi.dei.estg.ipleiria.happy_house;
 
+import amsi.dei.estg.ipleiria.happy_house.modelos.Imovel;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;

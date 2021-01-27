@@ -9,7 +9,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import amsi.dei.estg.ipleiria.happy_house.modelos.User;
 
@@ -29,8 +32,11 @@ public class UserJsonParser {
                 String email = user.getString("email");
                 int nif= user.getInt("nif");
                 String favoritos = user.getString("favoritos");
+                String authKey = user.getString("authKey");
+                String createdAt = user.getString("createdAt");
+                String updatedAt = user.getString("updatedAt");
 
-                User auxUsers = new User(id, username, nif,email, password_hash,telemovel, favoritos);
+                User auxUsers = new User(id, username, nif,email, password_hash,telemovel, favoritos, authKey, createdAt, updatedAt);
                 tempUsers.add(auxUsers);
             }
 
@@ -55,9 +61,12 @@ public class UserJsonParser {
             int nif= user.getInt("nif");
             String email = user.getString("email");
             String favoritos = user.getString("favoritos");
+            String authKey = user.getString("authKey");
+            String createdAt = user.getString("createdAt");
+            String updatedAt = user.getString("updatedAt");
 
 
-            auxUser = new User(id, username, nif,email, password_hash,telemovel, favoritos);
+            auxUser = new User(id, username, nif,email, password_hash,telemovel, favoritos, authKey, createdAt, updatedAt);
 
         }catch (JSONException e){
             e.printStackTrace();

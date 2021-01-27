@@ -114,6 +114,19 @@
             android:hint="Telemovel"
             android:inputType="phone" />
 
+        <Space
+            android:layout_width="222dp"
+            android:layout_height="20dp" />
+
+        <EditText
+            android:id="@+id/etNif"
+            android:layout_width="224dp"
+            android:layout_height="50dp"
+            android:drawableRight="@drawable/ic_historico_compras"
+            android:ems="10"
+            android:hint="NIF"
+            android:inputType="number" />
+
 
     </LinearLayout>
 
@@ -149,8 +162,8 @@
         android:background="@drawable/buttonstyle"
         android:text="Registar"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="@+id/LoginPainel"
-        app:layout_constraintStart_toStartOf="@+id/LoginPainel"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="@+id/LoginPainel"
         app:layout_constraintVertical_bias="0.82"
         tools:ignore="MissingConstraints" />
