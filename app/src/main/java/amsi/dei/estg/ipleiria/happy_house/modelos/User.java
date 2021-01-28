@@ -5,7 +5,7 @@ import java.util.Date;
 public class User {
 
     private int id,telemovel,nif;
-    private String username,email,password_hash,favoritos,authKey,createdAt,updatedAt;
+    private String username,email,password_hash,favoritos,auth_Key,created_at,updated_at;
 
     public int getId() {return id; }
 
@@ -33,33 +33,33 @@ public class User {
 
     public String getFavoritos() { return favoritos; }
 
-    public String getAuthKey() {
-        return authKey;
+    public String getAuth_Key() {
+        return auth_Key;
     }
 
-    public void setAuthKey(String authKey) {
-        this.authKey = authKey;
+    public void setAuthKey(String auth_Key) {
+        this.auth_Key = auth_Key;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public String getUpdated_at() {
+        return updated_at;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
 
     public void setFavoritos(String favoritos) { this.favoritos = favoritos; }
 
-    public User(int id, String username, int nif, String email, String password_hash, int telemovel, String favoritos, String authKey, String createdAt, String updatedAt) {
+    public User(int id, String username, int nif, String email, String password_hash, int telemovel, String favoritos, String auth_Key, String created_at, String updated_at) {
         this.id = id;
         this.username = username;
         this.nif = nif;
@@ -67,8 +67,8 @@ public class User {
         this.password_hash = password_hash;
         this.telemovel = telemovel;
         this.favoritos = favoritos;
-        this.authKey = authKey;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.auth_Key = auth_Key;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
     }
 }

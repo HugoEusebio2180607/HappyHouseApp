@@ -15,7 +15,7 @@ public class UserBDHelper extends SQLiteOpenHelper {
 
 
     private static final String DB_NAME = "UserBD";
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
     private static final String TABLE_NAME = "User";
 
     private static final String ID = "id";
