@@ -5,7 +5,7 @@ import java.util.Date;
 public class User {
 
     private int id,telemovel,nif;
-    private String username,email,password_hash,favoritos,auth_Key,created_at,updated_at;
+    private String username,email,password_hash,favoritos,auth_key,created_at,updated_at;
 
     public int getId() {return id; }
 
@@ -33,12 +33,12 @@ public class User {
 
     public String getFavoritos() { return favoritos; }
 
-    public String getAuth_Key() {
-        return auth_Key;
+    public String getAuth_key() {
+        return auth_key;
     }
 
-    public void setAuthKey(String auth_Key) {
-        this.auth_Key = auth_Key;
+    public void setAuthKey(String auth_key) {
+        this.auth_key = auth_key;
     }
 
     public String getCreated_at() {
@@ -59,7 +59,7 @@ public class User {
 
     public void setFavoritos(String favoritos) { this.favoritos = favoritos; }
 
-    public User(int id, String username, int nif, String email, String password_hash, int telemovel, String favoritos, String auth_Key, String created_at, String updated_at) {
+    public User(int id, String username, int nif, String email, String password_hash, int telemovel, String favoritos, String auth_key, String created_at, String updated_at) {
         this.id = id;
         this.username = username;
         this.nif = nif;
@@ -67,7 +67,7 @@ public class User {
         this.password_hash = password_hash;
         this.telemovel = telemovel;
         this.favoritos = favoritos;
-        this.auth_Key = auth_Key;
+        this.auth_key = auth_key;
         this.created_at = created_at;
         this.updated_at = updated_at;
     }

@@ -32,11 +32,11 @@ public class UserJsonParser {
                 String email = user.getString("email");
                 int nif= user.getInt("nif");
                 String favoritos = user.getString("favoritos");
-                String auth_Key = user.getString("auth_Key");
+                String auth_key = user.getString("auth_key");
                 String created_at = user.getString("created_at");
                 String updated_at = user.getString("updated_at");
 
-                User auxUsers = new User(id, username, nif,email, password_hash,telemovel, favoritos, auth_Key, created_at, updated_at);
+                User auxUsers = new User(id, username, nif,email, password_hash,telemovel, favoritos, auth_key, created_at, updated_at);
                 tempUsers.add(auxUsers);
             }
 
@@ -61,12 +61,12 @@ public class UserJsonParser {
             int nif= user.getInt("nif");
             String email = user.getString("email");
             String favoritos = user.getString("favoritos");
-            String auth_Key = user.getString("auth_Key");
+            String auth_key = user.getString("auth_key");
             String created_at = user.getString("created_at");
             String updated_at = user.getString("updated_at");
 
 
-            auxUser = new User(id, username, nif,email, password_hash,telemovel, favoritos, auth_Key, created_at, updated_at);
+            auxUser = new User(id, username, nif,email, password_hash,telemovel, favoritos, auth_key, created_at, updated_at);
 
         }catch (JSONException e){
             e.printStackTrace();

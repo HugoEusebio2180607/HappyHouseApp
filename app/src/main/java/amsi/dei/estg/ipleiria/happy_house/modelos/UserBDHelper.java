@@ -25,6 +25,9 @@ public class UserBDHelper extends SQLiteOpenHelper {
     private static final String PASSWORD_HASH = "password_hash";
     private static final String TELEMOVEL = "telemovel";
     private static final String FAVORITOS = "favoritos";
+    private static final String AUTH_KEY = "auth_key";
+    private static final String CREATED_AT = "created_at";
+    private static final String UPDATED_AT = "updated_at";
 
 
     private final SQLiteDatabase db;
@@ -43,7 +46,10 @@ public class UserBDHelper extends SQLiteOpenHelper {
                 EMAIL + " TEXT NOT NULL, " +
                 PASSWORD_HASH + " TEXT NOT NULL, " +
                 TELEMOVEL + " INTEGER  NOT NULL, " +
-                FAVORITOS + " TEXT " +
+                FAVORITOS + " TEXT, " +
+                AUTH_KEY + " TEXT NOT NULL, " +
+                CREATED_AT + " TEXT NOT NULL, " +
+                UPDATED_AT + " TEXT NOT NULL " +
                 ");";
         sqLiteDatabase.execSQL(createUserTable);
     }
@@ -57,7 +63,7 @@ public class UserBDHelper extends SQLiteOpenHelper {
     public ArrayList<User> getAllUserBD(){
 
         ArrayList<User> users = new ArrayList<>();
-        Cursor cursor = this.db.query(TABLE_NAME, new String[]{ID, USERNAME, NIF, EMAIL, PASSWORD_HASH, TELEMOVEL, FAVORITOS},
+        Cursor cursor = this.db.query(TABLE_NAME, new String[]{ID, USERNAME, NIF, EMAIL, PASSWORD_HASH, TELEMOVEL, FAVORITOS, AUTH_KEY, CREATED_AT, UPDATED_AT},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()){
@@ -77,6 +83,9 @@ public class UserBDHelper extends SQLiteOpenHelper {
         values.put(EMAIL,user.getEmail());
         values.put(TELEMOVEL,user.getTelemovel());
         values.putNull(FAVORITOS);
+        values.put(AUTH_KEY,user.getAuth_key());
+        values.put(CREATED_AT,user.getCreated_at());
+        values.put(UPDATED_AT,user.getUpdated_at());
 
         this.db.insert(TABLE_NAME, null, values);
     }
