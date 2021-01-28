@@ -25,13 +25,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private FragmentManager fragmentManager;
 
+    public static final String CHAVE_ID = "ID";
     public static final String CHAVE_USERNAME = "USERNAME";
     public static final String CHAVE_PASSWORD = "PASSWORD";
     public static final String CHAVE_TELEMOVEL = "TELEMOVEL";
     public static final String SECCAO_INFO_USER = "SECCAO_INFO_USER";
     private String username = "";
     private String password = "";
-    private int telemovel;
+    private int telemovel, id;
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -61,19 +62,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void carregarCabecalho() {
-        sharedPreferences = getSharedPreferences(SECCAO_INFO_USER, Context.MODE_PRIVATE);
+        sharedPreferences = getApplicationContext().getSharedPreferences(SECCAO_INFO_USER, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        username = getIntent().getStringExtra(CHAVE_USERNAME).toString();
-        password = getIntent().getStringExtra(CHAVE_PASSWORD).toString();
-        //telemovel = Integer.parseInt(getIntent().getStringExtra(CHAVE_TELEMOVEL).toString());
+        username = getIntent().getStringExtra(CHAVE_USERNAME);
+        password = getIntent().getStringExtra(CHAVE_PASSWORD);
+        telemovel = getIntent().getIntExtra(CHAVE_TELEMOVEL, 0);
+        id = getIntent().getIntExtra(CHAVE_ID, 0);
 
         if (username == null) {
             username = sharedPreferences.getString(SECCAO_INFO_USER, "Não Existe");
         } else {
-            editor.putString(SECCAO_INFO_USER, username);
-            editor.putString(SECCAO_INFO_USER, password);
-            //editor.putInt(SECCAO_INFO_USER, telemovel);
+            editor.putString(CHAVE_USERNAME, username);
+            editor.putString(CHAVE_PASSWORD, password);
+            editor.putInt(CHAVE_TELEMOVEL, telemovel);
+            editor.putInt(CHAVE_ID, id);
             editor.apply();
         }
 

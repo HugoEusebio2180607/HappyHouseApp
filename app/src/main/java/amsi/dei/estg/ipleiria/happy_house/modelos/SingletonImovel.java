@@ -185,6 +185,39 @@ public class SingletonImovel extends Application implements ImoveisListener {
         volleyQueue.add(req);
     }
 
+    public void editarUserAPI(final User user, final Context context){
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlApiUsers + user.getId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println("--> RESPOSTA PUT " + response);
+                UserJsonParser.parserJsonUsers(response, context);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("--> ERRO: editarUserAPI " + error.getMessage());
+            }
+        })
+        {
+            protected Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("username", user.getUsername());
+                params.put("password", user.getPassword_hash());
+                params.put("telemovel", user.getTelemovel()+"");
+
+                return  params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+
+    public User getUser(int id){
+        for (User user: users)
+            if (user.getId()==id)
+                return user;
+        return null;
+    }
+
     public void setImoveisListener(ImoveisListener imoveisListener){
         this.imoveisListener = imoveisListener;
     }

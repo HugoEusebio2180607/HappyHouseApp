@@ -171,12 +171,14 @@ public class LoginActivity extends AppCompatActivity {
                         int positionpass = -1;
                         positionpass=auxUser.indexOf(mPass);
                         int mTelemovel = checkUser.getTelemovel();
+                        int mId = checkUser.getId();
                         Toast.makeText(LoginActivity.this, "password", Toast.LENGTH_SHORT).show();
                         if (position==positionpass){
                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                             intent.putExtra(MainActivity.CHAVE_USERNAME, mUsername);
                             intent.putExtra(MainActivity.CHAVE_PASSWORD, mPass);
                             intent.putExtra(MainActivity.CHAVE_TELEMOVEL, mTelemovel);
+                            intent.putExtra(MainActivity.CHAVE_ID, mId);
                             startActivity(intent);
                             finish();
                         }
