@@ -17,7 +17,7 @@ import java.util.Locale;
 import amsi.dei.estg.ipleiria.happy_house.modelos.User;
 
 public class UserJsonParser {
-    public static ArrayList<User> parserJsonUsers(JSONArray response, Context context){
+    public static ArrayList<User> parserJsonUser(JSONArray response, Context context){
         System.out.println("--> PARSER LISTA USERS: " + response);
         ArrayList<User> tempUsers = new ArrayList<>();
 
@@ -47,7 +47,7 @@ public class UserJsonParser {
 
         return tempUsers;
     }
-    public static User parserJsonUsers(String response, Context context){
+    public static User parserJsonUser(String response, Context context){
         System.out.println("--> PARSER ADICIONAR: " + response);
         User auxUser = null;
 

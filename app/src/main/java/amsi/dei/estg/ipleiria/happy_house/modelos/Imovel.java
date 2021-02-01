@@ -3,8 +3,7 @@ package amsi.dei.estg.ipleiria.happy_house.modelos;
 import java.text.DecimalFormat;
 
 public class Imovel {
-    private int id,area,nquartos,nwc,piso, garagem, id_user;
-    private double preco;
+    private int id,area,nquartos,nwc,piso, garagem, id_user, preco;
     private String cidade,estado,descricao,morada,codigo_postal, latitude, longitude;
 
     public int getId() {
@@ -51,11 +50,11 @@ public class Imovel {
         this.id_user = id_user;
     }
 
-    public double getPreco() {
+    public int getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(int preco) {
         this.preco = preco;
     }
 
@@ -123,7 +122,7 @@ public class Imovel {
         this.longitude = longitude;
     }
 
-    public Imovel(int id, int area, int nquartos, int nwc, int piso, int id_user, double preco, String cidade, String estado, String descricao, String morada, String codigo_postal, int garagem, String latitude, String longitude) {
+    public Imovel(int id, String estado, int area, int nquartos, int nwc, int preco, String descricao, int garagem, int piso, String morada, String codigo_postal, String cidade, String latitude, String longitude, int id_user) {
         this.id = id;
         this.area = area;
         this.nquartos = nquartos;

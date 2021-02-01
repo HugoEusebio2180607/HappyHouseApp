@@ -136,10 +136,17 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                                     System.out.println("--->"+ auxLista);
 
                                     for (Imovel tempImovel : SingletonImovel.getInstance(getContext()).getImoveisBD()){
-                                        if (tempImovel.getCidade().toLowerCase().contentEquals(auxLista.toString().toLowerCase())){
-                                            tempLista.add(tempImovel);
+                                        for (String cidade : auxLista){
+                                            if (tempImovel.getCidade().toLowerCase().contentEquals(cidade.toLowerCase())){
+                                                tempLista.add(tempImovel);
+                                            }
+                                            /*if (tempImovel.getCidade().compareToIgnoreCase(cidade) == 0){
+                                                tempLista.add(tempImovel);
+                                            }*/
                                         }
+
                                     }
+                                    System.out.println("templist -->"+tempLista);
 
                                 }
                                 if (auxLista.isEmpty()){

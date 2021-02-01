@@ -26,7 +26,7 @@ public class ImovelJsonParser {
                 int area = imovel.getInt("area");
                 int n_quartos = imovel.getInt("n_quartos");
                 int n_wc = imovel.getInt("n_wc");
-                double preco = imovel.getInt("preco");
+                int preco = imovel.getInt("preco");
                 String descricao = imovel.getString("descricao");
                 int garagem = imovel.getInt("garagem");
                 int piso = imovel.getInt("piso");
@@ -37,7 +37,7 @@ public class ImovelJsonParser {
                 String longitude = imovel.getString("longitude");
                 int id_user = imovel.getInt("id_user");
 
-                Imovel auxImovel = new Imovel(id, area, n_quartos, n_wc, piso, id_user, preco, cidade, estado, descricao, morada, codigo_postal, garagem, latitude, longitude);
+                Imovel auxImovel = new Imovel(id, estado, area, n_quartos, n_wc, preco, descricao,  garagem, piso, morada, codigo_postal, cidade, latitude, longitude, id_user);
                 tempListaImoveis.add(auxImovel);
             }
         } catch (JSONException e) {
@@ -61,7 +61,7 @@ public class ImovelJsonParser {
             int area = imovel.getInt("area");
             int n_quartos = imovel.getInt("n_quartos");
             int n_wc = imovel.getInt("n_wc");
-            double preco = imovel.getInt("preco");
+            int preco = imovel.getInt("preco");
             String descricao = imovel.getString("descricao");
             int garagem = imovel.getInt("garagem");
             int piso = imovel.getInt("piso");
@@ -72,7 +72,7 @@ public class ImovelJsonParser {
             String longitude = imovel.getString("longitude");
             int id_user = imovel.getInt("id_user");
 
-            auxImovel = new Imovel(id, area, n_quartos, n_wc, piso, id_user, preco, cidade, estado, descricao, morada, codigo_postal, garagem, latitude, longitude);
+            auxImovel = new Imovel(id, estado, area, n_quartos, n_wc, preco, descricao,  garagem, piso, morada, codigo_postal, cidade, latitude, longitude, id_user);
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package amsi.dei.estg.ipleiria.happy_house;
 
+import amsi.dei.estg.ipleiria.happy_house.listeners.UsersListener;
 import amsi.dei.estg.ipleiria.happy_house.modelos.SingletonImovel;
 import amsi.dei.estg.ipleiria.happy_house.modelos.User;
 import amsi.dei.estg.ipleiria.happy_house.utils.UserJsonParser;
@@ -26,12 +27,13 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegistarActivity extends AppCompatActivity {
+public class RegistarActivity extends AppCompatActivity implements UsersListener {
 
     private EditText etNome;
     private EditText etEmail;
@@ -78,6 +80,7 @@ public class RegistarActivity extends AppCompatActivity {
         final String password = this.etPassword.getText().toString().trim();
         final String telemovel = this.etTelefone.getText().toString().trim();
 
+        SingletonImovel.getInstance(getApplicationContext()).setUsersListener(this);
         SingletonImovel.getInstance(getApplicationContext()).adicionarUserAPI(criarUser(), getApplicationContext());
         finish();
 
@@ -161,5 +164,14 @@ public class RegistarActivity extends AppCompatActivity {
         return auxUser;
     }
 
+    @Override
+    public void onRefreshListaUsers(ArrayList<User> listaUsers) {
+
+    }
+
+    @Override
+    public void onUpdateListaUsers(User user) {
+
+    }
 }
 

@@ -1,7 +1,6 @@
 package amsi.dei.estg.ipleiria.happy_house.modelos;
 
 import android.app.Application;
-import android.content.ContentValues;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -19,12 +18,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import amsi.dei.estg.ipleiria.happy_house.R;
 import amsi.dei.estg.ipleiria.happy_house.listeners.ImoveisListener;
+import amsi.dei.estg.ipleiria.happy_house.listeners.UsersListener;
 import amsi.dei.estg.ipleiria.happy_house.utils.ImovelJsonParser;
 import amsi.dei.estg.ipleiria.happy_house.utils.UserJsonParser;
 
-public class SingletonImovel extends Application implements ImoveisListener {
+public class SingletonImovel extends Application implements ImoveisListener, UsersListener {
 
     private static SingletonImovel instance = null;
     private ArrayList<Imovel> imovels;
@@ -33,11 +32,12 @@ public class SingletonImovel extends Application implements ImoveisListener {
     private UserBDHelper usersBD;
 
     private ImoveisListener imoveisListener;
+    private UsersListener usersListener;
 
     private static RequestQueue volleyQueue = null;
     //private String tokenAPI = "TOKEN";
     private String mUrlApiImoveis = "http://10.0.2.2:8888/imovel/";
-    private  String mUrlApiUsers ="http://10.0.2.2:8888/user/";
+    private  String mUrlApiUsers ="http://10.0.2.2:8888/user";
 
     public static synchronized SingletonImovel getInstance(Context context){
         if (instance == null){
@@ -143,7 +143,7 @@ public class SingletonImovel extends Application implements ImoveisListener {
                 @Override
                 public void onResponse(JSONArray response) {
                     System.out.println(response);
-                    users= UserJsonParser.parserJsonUsers(response, context);
+                    users= UserJsonParser.parserJsonUser(response, context);
                     adicionarUsersBD(users);
 
                 }
@@ -159,11 +159,15 @@ public class SingletonImovel extends Application implements ImoveisListener {
     }
 
     public void adicionarUserAPI(final User user, final Context context){
-        StringRequest req = new StringRequest(Request.Method.POST, mUrlApiUsers, new Response.Listener<String>() {
+        StringRequest req = new StringRequest(Request.Method.POST, "http://10.0.2.2:8888/user", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 System.out.println("--> RESPOSTA ADD POST " + response);
-                UserJsonParser.parserJsonUsers(response, context);
+                if (usersListener != null){
+                    usersListener.onUpdateListaUsers(UserJsonParser.parserJsonUser(response, context));
+                }
+
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -190,7 +194,7 @@ public class SingletonImovel extends Application implements ImoveisListener {
             @Override
             public void onResponse(String response) {
                 System.out.println("--> RESPOSTA PUT " + response);
-                UserJsonParser.parserJsonUsers(response, context);
+                UserJsonParser.parserJsonUser(response, context);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -224,6 +228,20 @@ public class SingletonImovel extends Application implements ImoveisListener {
 
     @Override
     public void onRefreshListaImoveis(ArrayList<Imovel> listaImoveis) {
+
+    }
+
+    public void setUsersListener(UsersListener usersListener){
+        this.usersListener = usersListener;
+    }
+
+    @Override
+    public void onRefreshListaUsers(ArrayList<User> listaUsers) {
+
+    }
+
+    @Override
+    public void onUpdateListaUsers(User user) {
 
     }
 }
