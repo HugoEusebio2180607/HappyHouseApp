@@ -12,6 +12,9 @@ import amsi.dei.estg.ipleiria.happy_house.modelos.User;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -30,10 +33,10 @@ public class FavoritosFragment extends Fragment {
     private User user;
 
     private SharedPreferences sharedPreferences;
-    public static final String SECCAO_INFO_USER = "SECCAO_INFO_USER";
     public static final String CHAVE_ID = "ID";
     public static final String CHAVE_FAVORITOS = "FAVORITOS";
 
+    public static final String SECCAO_INFO_USER = "SECCAO_INFO_USER";
     public FavoritosFragment() {
         // Required empty public constructor
     }
@@ -93,4 +96,6 @@ public class FavoritosFragment extends Fragment {
 
         return view;
     }
+
+
 }

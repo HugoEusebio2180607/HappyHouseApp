@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.tom_roush.pdfbox.pdmodel.PDDocument;
@@ -127,7 +128,8 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
                                 int idx = userCidades.indexOf(position);
-                                if (idx == -1 && isChecked){
+                                System.out.println(idx);
+                                if (idx == -1 && isChecked) {
                                     userCidades.add(position);
                                 } else {
                                     userCidades.remove(idx);
@@ -169,6 +171,7 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                                     System.out.println("templist -->"+tempLista);
 
                                 }
+
                                 if (auxLista.isEmpty()){
                                     SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
                                 } else {
@@ -189,6 +192,7 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                                         userCidades.clear();
                                     }
                                 }
+                                System.out.println("sai");
                                 SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
                             }
                         })
@@ -200,6 +204,7 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                              }
                          })
                          .show();
+
 
 
                 break;
