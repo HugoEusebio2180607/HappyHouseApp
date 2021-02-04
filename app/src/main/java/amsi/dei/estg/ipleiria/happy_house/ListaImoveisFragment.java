@@ -1,15 +1,22 @@
 package amsi.dei.estg.ipleiria.happy_house;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 
 import amsi.dei.estg.ipleiria.happy_house.listeners.ImoveisListener;
 import amsi.dei.estg.ipleiria.happy_house.utils.ImovelJsonParser;
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +27,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.tom_roush.pdfbox.pdmodel.PDDocument;
+import com.tom_roush.pdfbox.pdmodel.PDPage;
+import com.tom_roush.pdfbox.pdmodel.PDPageContentStream;
+import com.tom_roush.pdfbox.pdmodel.font.PDFont;
+import com.tom_roush.pdfbox.pdmodel.font.PDType1Font;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -35,10 +49,13 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
     private ArrayList<Imovel>listaImoveis;
     private ListaImovelAdaptador listaImovelAdaptador;
     private MenuItem menuCidadeFiltro, menuQuartosFiltro, menuEstadoFiltro, menuPrecoFiltro;
-    private String[] listaCidades, nQuartos;
-    private boolean[] checkedCidades, checkedQuartos;
+    private String[] listaCidades, nQuartos, nEstado;
+    private boolean[] checkedCidades, checkedQuartos, checkedEstado;
     private ArrayList<Integer> userCidades = new ArrayList<>();
     private ArrayList<Integer> userQuartos = new ArrayList<>();
+    private ArrayList<Integer> userEstado = new ArrayList<>();
+
+    File root;
 
 
     @Override
@@ -50,11 +67,15 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
         //listaImoveis= SingletonImovel.getInstance(getContext()).getImovels();
         //lvListaImoveis.setAdapter(new ListaImovelAdaptador(getContext(),listaImoveis));
 
+        root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+
 
         listaCidades = getResources().getStringArray(R.array.cidades);
         checkedCidades = new boolean[listaCidades.length];
         nQuartos = getResources().getStringArray(R.array.quartos);
         checkedQuartos = new boolean[nQuartos.length];
+        nEstado = getResources().getStringArray(R.array.estadoList);
+        checkedEstado = new boolean[nEstado.length];
 
 
         lvListaImoveis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,7 +109,7 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
         menuCidadeFiltro = menu.findItem(R.id.itemCidadeFiltro);
         menuQuartosFiltro = menu.findItem(R.id.itemQuartosFiltro);
         menuEstadoFiltro = menu.findItem(R.id.itemEstadoFiltro);
-        menuPrecoFiltro = menu.findItem(R.id.itemPrecoFiltro);
+        //menuPrecoFiltro = menu.findItem(R.id.itemPrecoFiltro);
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -105,12 +126,11 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                         .setMultiChoiceItems(listaCidades, checkedCidades, new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
-                                if (isChecked){
-                                    if (!userCidades.contains(position)) {
-                                        userCidades.add(position);
-                                    } else {
-                                        userCidades.remove(position);
-                                    }
+                                int idx = userCidades.indexOf(position);
+                                if (idx == -1 && isChecked){
+                                    userCidades.add(position);
+                                } else {
+                                    userCidades.remove(idx);
                                 }
                             }
                         })
@@ -172,6 +192,13 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                                 SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
                             }
                         })
+                         .setNegativeButton("PDF", new DialogInterface.OnClickListener() {
+                             @Override
+                             public void onClick(DialogInterface dialogInterface, int i) {
+                                 createPDF();
+                                 dialogInterface.dismiss();
+                             }
+                         })
                          .show();
 
 
@@ -179,17 +206,16 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
             case R.id.itemQuartosFiltro:
                 Toast.makeText(getContext(), "Quartos", Toast.LENGTH_SHORT).show();
 
-                /*new AlertDialog.Builder(getContext())
+                new AlertDialog.Builder(getContext())
                         .setTitle(R.string.quartos)
                         .setMultiChoiceItems(nQuartos, checkedQuartos, new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
-                                if (isChecked){
-                                    if (!userQuartos.contains(position)) {
-                                        userQuartos.add(position);
-                                    } else {
-                                        userQuartos.remove(position);
-                                    }
+                                int idx = userQuartos.indexOf(position);
+                                if (idx == -1 && isChecked){
+                                    userQuartos.add(position);
+                                } else {
+                                    userQuartos.remove(idx);
                                 }
                             }
                         })
@@ -215,11 +241,12 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                                     System.out.println("--->"+ auxLista);
 
                                     for (Imovel tempImovel : SingletonImovel.getInstance(getContext()).getImoveisBD()){
-                                        if (tempImovel.getNquartos() == Integer.parseInt(String.valueOf(auxLista))){
-                                            tempLista.add(tempImovel);
+                                        for(int quarto : auxLista){
+                                            if (tempImovel.getNquartos() == quarto){
+                                                tempLista.add(tempImovel);
+                                            }
                                         }
                                     }
-
                                 }
                                 if (auxLista.isEmpty()){
                                     SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
@@ -244,15 +271,83 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                                 SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
                             }
                         })
-                        .show();*/
+                        .show();
 
                 break;
             case R.id.itemEstadoFiltro:
                 Toast.makeText(getContext(), "Estado", Toast.LENGTH_SHORT).show();
+
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.estado)
+                        .setMultiChoiceItems(nEstado, checkedEstado, new DialogInterface.OnMultiChoiceClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
+                                int idx = userEstado.indexOf(position);
+                                if (idx == -1 && isChecked){
+                                    userEstado.add(position);
+                                } else {
+                                    userEstado.remove(idx);
+                                }
+                            }
+                        })
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.confirmar, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+
+                                ArrayList<Imovel> tempLista = new ArrayList<>();
+                                ArrayList<String> auxLista = new ArrayList<>();
+
+                                if (userEstado == null){
+                                    dialogInterface.dismiss();
+                                } else {
+
+                                    ArrayList<String> list = new ArrayList<>(Arrays.asList("Novo", "Usado", "Renovado"));
+
+                                    for (int i=0; i<userEstado.size(); i++){
+                                        String aux = list.get(userEstado.get(i));
+                                        auxLista.add(aux);
+
+                                    }
+                                    System.out.println("--->"+ auxLista);
+
+                                    for (Imovel tempImovel : SingletonImovel.getInstance(getContext()).getImoveisBD()){
+                                        for(String estado : auxLista){
+                                            if (tempImovel.getEstado().equals(estado)){
+                                                tempLista.add(tempImovel);
+                                            }
+                                        }
+                                    }
+                                }
+                                if (auxLista.isEmpty()){
+                                    SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
+                                } else {
+                                    lvListaImoveis.setAdapter(new ListaImovelAdaptador(getContext(), tempLista));
+                                }
+
+
+                            }
+                        })
+                        .setNeutralButton(R.string.limpar, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                                if (userEstado == null){
+                                    dialogInterface.dismiss();
+                                } else {
+                                    for (int i = 0; i < checkedEstado.length; i++) {
+                                        checkedEstado[i] = false;
+                                        userEstado.clear();
+                                    }
+                                }
+                                SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
+                            }
+                        })
+                        .show();
+
                 break;
-            case R.id.itemPrecoFiltro:
+            /*case R.id.itemPrecoFiltro:
                 Toast.makeText(getContext(), "Preco", Toast.LENGTH_SHORT).show();
-                break;
+                break;*/
         }
         return super.onOptionsItemSelected(item);
     }
@@ -264,6 +359,53 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
             listaImovelAdaptador = new ListaImovelAdaptador(getContext(), listaImoveis);
             lvListaImoveis.setAdapter(new ListaImovelAdaptador(getContext(), listaImoveis));
             listaImovelAdaptador.refresh(listaImoveis);
+        }
+    }
+
+    public void createPDF(){
+
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+
+        PDDocument doc = new PDDocument();
+        PDPage page = new PDPage();
+        doc.addPage(page);
+
+        // Create a new font object selecting one of the PDF base fonts
+        PDFont font = PDType1Font.HELVETICA;
+
+        try{
+            // Define a content stream for adding to the PDF
+            PDPageContentStream content = new PDPageContentStream(doc,page);
+
+            // Write listaCidades
+            content.beginText();
+            content.setFont(font, 20);
+
+            content.newLineAtOffset(20, 450);
+            content.setLeading(18f);
+
+            for (String cidade : listaCidades) {
+                content.showText(cidade);
+                content.newLine();
+            }
+
+            content.endText();
+
+            // Make sure that the content stream is closed:
+            content.close();
+
+            // Save the final pdf document to a file
+            String path = root.getAbsolutePath() + "/Created.pdf";
+            doc.save(path);
+            doc.close();
+            Toast.makeText(getActivity(), "PDF Guardado em " + path, Toast.LENGTH_SHORT).show();
+
+        }catch (Exception e){
+            Log.e("PdfBox-Android-Sample", "Exception thrown while creating PDF", e);
         }
     }
 }

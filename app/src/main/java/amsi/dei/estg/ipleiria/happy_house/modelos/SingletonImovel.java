@@ -159,7 +159,7 @@ public class SingletonImovel extends Application implements ImoveisListener, Use
     }
 
     public void adicionarUserAPI(final User user, final Context context){
-        StringRequest req = new StringRequest(Request.Method.POST, "http://10.0.2.2:8888/user", new Response.Listener<String>() {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlApiUsers, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 System.out.println("--> RESPOSTA ADD POST " + response);
@@ -190,11 +190,13 @@ public class SingletonImovel extends Application implements ImoveisListener, Use
     }
 
     public void editarUserAPI(final User user, final Context context){
-        StringRequest req = new StringRequest(Request.Method.PUT, mUrlApiUsers + user.getId(), new Response.Listener<String>() {
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlApiUsers + "/" + user.getId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 System.out.println("--> RESPOSTA PUT " + response);
-                UserJsonParser.parserJsonUser(response, context);
+                if(usersListener != null){
+                    usersListener.onUpdateListaUsers(UserJsonParser.parserJsonUser(response, context));
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -208,6 +210,32 @@ public class SingletonImovel extends Application implements ImoveisListener, Use
                 params.put("username", user.getUsername());
                 params.put("password", user.getPassword_hash());
                 params.put("telemovel", user.getTelemovel()+"");
+
+                return  params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+
+    public void editarUserFavoritosAPI(final User user, final Context context){
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlApiUsers + "/" + user.getId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println("--> RESPOSTA PUT FAVORITOS" + response);
+                if(usersListener != null){
+                    usersListener.onUpdateListaUsers(UserJsonParser.parserJsonUser(response, context));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("--> ERRO: editarUserFavoritosAPI " + error.getMessage());
+            }
+        })
+        {
+            protected Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("favoritos", user.getFavoritos());
 
                 return  params;
             }

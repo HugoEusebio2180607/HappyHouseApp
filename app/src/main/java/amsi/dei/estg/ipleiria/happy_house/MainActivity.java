@@ -102,18 +102,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = new ListaImoveisFragment();
                 setTitle(menuItem.getTitle());
                 break;
-            case R.id.nav_historico_compras:
+            /*case R.id.nav_historico_compras:
                 fragment = new HistoricoCompraAluguerFragment();
                 setTitle(menuItem.getTitle());
-                break;
+                break;*/
             case R.id.nav_favoritos:
                 fragment = new FavoritosFragment();
                 setTitle(menuItem.getTitle());
                 break;
-            case R.id.nav_historico_visitas:
+            /*case R.id.nav_historico_visitas:
                 fragment = new HistoricoVisitasFragment();
                 setTitle(menuItem.getTitle());
-                break;
+                break;*/
             case R.id.nav_definicoes:
                 fragment = new DefinicoesFragment();
                 setTitle(menuItem.getTitle());

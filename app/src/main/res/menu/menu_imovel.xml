@@ -20,10 +20,10 @@
         android:icon="@drawable/ic_historico_compras"
         app:showAsAction="always"/>
 
-    <item
+    <!--<item
         android:id="@+id/itemPrecoFiltro"
         android:title="@string/preco"
         android:icon="@drawable/ic_euro"
-        app:showAsAction="always"/>
+        app:showAsAction="always"/>-->
 
 </menu>

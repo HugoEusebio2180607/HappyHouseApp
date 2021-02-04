@@ -8,18 +8,18 @@
             android:id="@+id/nav_imoveis"
             android:icon="@drawable/ic_home"
             android:title="Imóveis" />
-        <item
+        <!--<item
             android:id="@+id/nav_historico_compras"
             android:icon="@drawable/ic_historico_compras"
-            android:title="Histórico de Compra/Aluguer" />
+            android:title="Histórico de Compra/Aluguer" />-->
         <item
             android:id="@+id/nav_favoritos"
             android:icon="@drawable/ic_favourite"
             android:title="Favoritos" />
-        <item
+        <!--<item
             android:id="@+id/nav_historico_visitas"
             android:icon="@drawable/ic_historico_visitas"
-            android:title="Histórico de Visitas" />
+            android:title="Histórico de Visitas" />-->
         <item
             android:id="@+id/nav_definicoes"
             android:icon="@drawable/ic_settings"
