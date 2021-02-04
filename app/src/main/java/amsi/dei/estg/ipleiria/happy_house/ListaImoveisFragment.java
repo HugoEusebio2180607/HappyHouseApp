@@ -3,6 +3,7 @@ package amsi.dei.estg.ipleiria.happy_house;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import amsi.dei.estg.ipleiria.happy_house.listeners.ImoveisListener;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -105,12 +107,12 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                         .setMultiChoiceItems(listaCidades, checkedCidades, new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
-                                if (isChecked){
-                                    if (!userCidades.contains(position)) {
-                                        userCidades.add(position);
-                                    } else {
-                                        userCidades.remove(position);
-                                    }
+                                int idx = userCidades.indexOf(position);
+                                System.out.println(idx);
+                                if (idx == -1 && isChecked) {
+                                    userCidades.add(position);
+                                } else {
+                                    userCidades.remove(idx);
                                 }
                             }
                         })
@@ -149,6 +151,7 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                                     System.out.println("templist -->"+tempLista);
 
                                 }
+
                                 if (auxLista.isEmpty()){
                                     SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
                                 } else {
@@ -169,10 +172,12 @@ public class ListaImoveisFragment extends Fragment implements ImoveisListener {
                                         userCidades.clear();
                                     }
                                 }
+                                System.out.println("sai");
                                 SingletonImovel.getInstance(getContext()).getAllImoveisAPI(getContext(), ImovelJsonParser.isConnectionInternet(getContext()));
                             }
                         })
-                         .show();
+                      .show();
+
 
 
                 break;

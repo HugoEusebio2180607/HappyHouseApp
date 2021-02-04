@@ -118,6 +118,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = new DefinicoesFragment();
                 setTitle(menuItem.getTitle());
                 break;
+            case R.id.nav_upload:
+                fragment = new UploadFragment();
+                setTitle(menuItem.getTitle());
+                break;
             case R.id.nav_logout:
                 System.exit(0);
                 break;

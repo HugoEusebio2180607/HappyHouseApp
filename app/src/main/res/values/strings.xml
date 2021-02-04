@@ -31,6 +31,7 @@
     <string name="preco">Preco</string>
     <string name="confirmar">Confirmar</string>
     <string name="limpar">Limpar</string>
+    <string name="coverte">converte</string>
 
     <string-array name="cidades">
         <item>Aveiro</item>

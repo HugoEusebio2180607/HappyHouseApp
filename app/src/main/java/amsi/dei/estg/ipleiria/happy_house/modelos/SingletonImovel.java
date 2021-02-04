@@ -180,8 +180,12 @@ public class SingletonImovel extends Application implements ImoveisListener, Use
                 Map<String, String> params = new HashMap<>();
                 params.put("username", user.getUsername());
                 params.put("email", user.getEmail());
-                params.put("password", user.getPassword_hash());
                 params.put("telemovel", user.getTelemovel()+"");
+                params.put("nif", user.getNif()+"");
+                params.put("auth_key", user.getAuth_key());
+                params.put("password_hash", user.getPassword_hash());
+                params.put("created_at", 1612392492+"");
+                params.put("updated_at", 1612392492+"");
 
                 return  params;
             }

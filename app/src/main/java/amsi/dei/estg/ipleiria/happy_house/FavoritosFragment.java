@@ -6,9 +6,14 @@ import android.os.Bundle;
 import amsi.dei.estg.ipleiria.happy_house.adaptadores.ListaImovelAdaptador;
 import amsi.dei.estg.ipleiria.happy_house.modelos.Imovel;
 import amsi.dei.estg.ipleiria.happy_house.modelos.SingletonImovel;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,6 +25,7 @@ public class FavoritosFragment extends Fragment {
 
     private ListView lvListaImoveis;
     private ArrayList<Imovel> listaImoveis;
+
 
     public FavoritosFragment() {
         // Required empty public constructor
@@ -48,4 +54,6 @@ public class FavoritosFragment extends Fragment {
 
         return view;
     }
+
+
 }

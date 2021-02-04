@@ -160,8 +160,18 @@ public class RegistarActivity extends AppCompatActivity implements UsersListener
 */
 
     private User criarUser(){
-        User auxUser = new User(0, etNome.getText().toString(), Integer.parseInt(etNif.getText().toString()), etEmail.getText().toString(), etPassword.getText().toString(), Integer.parseInt(etTelefone.getText().toString()), null, "j356B8Zd273YagfFewbwXtoivYxIAhQ6", String.valueOf(currentTime), String.valueOf(currentTime));
-        return auxUser;
+        return new User(
+                0,
+                etNome.getText().toString(),
+                Integer.parseInt(etNif.getText().toString()),
+                etEmail.getText().toString(),
+                etPassword.getText().toString(),
+                Integer.parseInt(etTelefone.getText().toString()),
+                null,
+                "j356B8Zd273YagfFewbwXtoivYxIAhQ6",
+                String.valueOf(currentTime),
+                String.valueOf(currentTime)
+        );
     }
 
     @Override
